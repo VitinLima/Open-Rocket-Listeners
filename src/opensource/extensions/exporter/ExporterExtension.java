@@ -36,7 +36,7 @@ public class ExporterExtension extends AbstractSimulationExtension {
   public boolean includeFieldsDescription = true;
   public boolean includeFlightEvents = true;
   public int appendSelection = 0;
-  public int[] fieldSelection = new int[]{};
+  public boolean[] fieldSelection = new boolean[FlightDataType.ALL_TYPES.length];
 
   @Override
   public void initialize(SimulationConditions sc) throws SimulationException {
@@ -65,10 +65,12 @@ public class ExporterExtension extends AbstractSimulationExtension {
     FlightDataBranch branch = simulation.getSimulatedData().getBranch(0);
     FlightDataType[] fields = new FlightDataType[fieldSelection.length];
     Unit[] units = new Unit[fieldSelection.length];
-    for(int i : fieldSelection){
-      FlightDataType f = FlightDataType.ALL_TYPES[i];
-      fields[i] = f;
-      units[i] = f.getUnitGroup().getDefaultUnit();
+    for(int i = 0; i < FlightDataType.ALL_TYPES.length; i++){
+      if(fieldSelection[i]){
+        FlightDataType f = FlightDataType.ALL_TYPES[i];
+        fields[i] = f;
+        units[i] = f.getUnitGroup().getDefaultUnit();
+      }
     }
 
     fw.append("<title>");

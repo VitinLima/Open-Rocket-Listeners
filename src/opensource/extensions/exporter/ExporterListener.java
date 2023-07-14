@@ -43,7 +43,7 @@ public class ExporterListener extends AbstractSimulationListener {
   public FlightDataType[] fields;
   public Unit[] units;
 
-  ExporterListener(File outputFile, String fieldSeparator, int decimalPlaces, boolean isExponentialNotation, String commentCharacter, boolean simulationComments, boolean fieldComments, boolean eventComments, int appendSelection, int[] fieldSelection) {
+  ExporterListener(File outputFile, String fieldSeparator, int decimalPlaces, boolean isExponentialNotation, String commentCharacter, boolean simulationComments, boolean fieldComments, boolean eventComments, int appendSelection, boolean[] fieldSelection) {
     this.outputFile = outputFile;
     this.fieldSeparator = fieldSeparator;
     this.decimalPlaces = decimalPlaces;
@@ -53,12 +53,23 @@ public class ExporterListener extends AbstractSimulationListener {
     this.fieldComments = fieldComments;
     this.eventComments = eventComments;
     this.appendSelection = appendSelection;
-    this.fields = new FlightDataType[fieldSelection.length];
-    this.units = new Unit[fieldSelection.length];
-    for(int i : fieldSelection){
-      FlightDataType f = FlightDataType.ALL_TYPES[i];
-      fields[i] = f;
-      units[i] = f.getUnitGroup().getDefaultUnit();
+    
+    int k = 0;
+    for(int i = 0; i < FlightDataType.ALL_TYPES.length; i++){
+      if(fieldSelection[i]){
+        k++;
+      }
+    }
+    this.fields = new FlightDataType[k];
+    this.units = new Unit[k];
+    k = 0;
+    for(int i = 0; i < FlightDataType.ALL_TYPES.length; i++){
+      if(fieldSelection[i]){
+        FlightDataType f = FlightDataType.ALL_TYPES[i];
+        fields[k] = f;
+        units[k++] = f.getUnitGroup().getDefaultUnit();
+        System.out.print(f.toString());
+      }
     }
   }
   

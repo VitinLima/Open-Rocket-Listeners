@@ -27,7 +27,7 @@ public class ExporterPanel extends javax.swing.JPanel {
         initComponents();
         
         for(int i = 0; i < FlightDataType.ALL_TYPES.length; i++){
-            FlighDataTypeCheckBoxWrapper f = new FlighDataTypeCheckBoxWrapper(FlightDataType.ALL_TYPES[i], i);
+            FlighDataTypeCheckBoxWrapper f = new FlighDataTypeCheckBoxWrapper(FlightDataType.ALL_TYPES[i], this.simulationExporter.fieldSelection[i], i);
             flightDataTypeCheckBoxes[i] = f;
             this.variablesPanel.add(f);
         }
@@ -36,11 +36,20 @@ public class ExporterPanel extends javax.swing.JPanel {
     public class FlighDataTypeCheckBoxWrapper extends javax.swing.JCheckBox{
         public FlightDataType flightDataType;
         public int index;
-        public FlighDataTypeCheckBoxWrapper(FlightDataType _f, int _index){
+        public FlighDataTypeCheckBoxWrapper(FlightDataType _f, boolean _isSelected, int _index){
             super();
             this.flightDataType = _f;
             this.index = _index;
             this.setText(_f.getName());
+            this.setSelected(_isSelected);
+            this.addActionListener((java.awt.event.ActionEvent evt) -> {
+                simulationExporter.fieldSelection[this.index] = this.isSelected();
+                if(this.isSelected()){
+                    System.out.println(this.flightDataType.toString() + " is Selected");
+                } else{
+                    System.out.println(this.flightDataType.toString() + " is not selected");
+                }
+            });
         }
     }
 
