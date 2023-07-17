@@ -16,7 +16,7 @@ public class ImpactDispersionConfigurator extends AbstractSwingSimulationExtensi
   @Override
   protected JComponent getConfigurationComponent(final ImpactDispersionExtension impactDispersion, final Simulation simulation, final JPanel panel) {
         impactDispersion.impactDispersionConditions.initiate(simulation);
-        panel.add(new ImpactDispersionPanel(impactDispersion.impactDispersionConditions));
+        panel.add(new ImpactDispersionPanel(impactDispersion.impactDispersionConditions, simulation));
         return panel;
   }
 }

@@ -1,4 +1,4 @@
-package opensource.extensions.exporter;
+package opensource.extensions.listenermanager;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -14,8 +14,8 @@ import net.sf.openrocket.simulation.extension.AbstractSimulationExtensionProvide
  * @author Vítor Lima Aguirra, Universidade de Brasília
  */
 @Plugin
-public class ExporterProvider extends AbstractSimulationExtensionProvider{
-    public ExporterProvider() {
-        super(ExporterExtension.class, new String[] { "Open Source", "Automatic Results Exporter" });
+public class ListenerManagerProvider extends AbstractSimulationExtensionProvider{
+    public ListenerManagerProvider() {
+        super(ListenerManagerExtension.class, new String[] { "Open Source", "Listeners manager" });
     }
 }

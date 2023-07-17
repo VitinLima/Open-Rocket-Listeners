@@ -40,6 +40,9 @@ public class ExporterExtension extends AbstractSimulationExtension {
 
   @Override
   public void initialize(SimulationConditions sc) throws SimulationException {
+      for(int i = 0; i < fieldSelection.length; i++){
+          this.fieldSelection[i] = false;
+      }
     sc.getSimulationListenerList().add(createListener());
   }
 

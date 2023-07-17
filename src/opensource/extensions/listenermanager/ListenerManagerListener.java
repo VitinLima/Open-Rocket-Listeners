@@ -1,4 +1,4 @@
-package opensource.extensions.exporter;
+package opensource.extensions.listenermanager;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -6,6 +6,7 @@ package opensource.extensions.exporter;
  */
 
 
+import opensource.extensions.exporter.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -29,7 +30,7 @@ import net.sf.openrocket.unit.Unit;
  *
  * @author Vítor Lima Aguirra, Universidade de Brasília, 31 de mai. de 2022
  */
-public class ExporterListener extends AbstractSimulationListener {
+public class ListenerManagerListener extends AbstractSimulationListener {
 
   public File outputFile;
   public String fieldSeparator;
@@ -43,7 +44,7 @@ public class ExporterListener extends AbstractSimulationListener {
   public FlightDataType[] fields;
   public Unit[] units;
 
-  ExporterListener(File outputFile, String fieldSeparator, int decimalPlaces, boolean isExponentialNotation, String commentCharacter, boolean simulationComments, boolean fieldComments, boolean eventComments, int appendSelection, boolean[] fieldSelection) {
+  ListenerManagerListener(File outputFile, String fieldSeparator, int decimalPlaces, boolean isExponentialNotation, String commentCharacter, boolean simulationComments, boolean fieldComments, boolean eventComments, int appendSelection, boolean[] fieldSelection) {
     this.outputFile = outputFile;
     this.fieldSeparator = fieldSeparator;
     this.decimalPlaces = decimalPlaces;
@@ -74,33 +75,7 @@ public class ExporterListener extends AbstractSimulationListener {
   }
   
   @Override
-  public void endSimulation(SimulationStatus status, SimulationException exception) {
-    FileOutputStream fos;
-    try {
-      fos = new FileOutputStream(outputFile, this.appendSelection == 0);
-      ArrayList<FlightDataType> _fields = new ArrayList<>();
-      ArrayList<Unit> _units = new ArrayList<>();
-      for (int i = 0; i < this.fields.length; i++) {
-        if (status.getFlightData().get(this.fields[i]) != null) {
-          _fields.add(this.fields[i]);
-          _units.add(this.units[i]);
-        }
-      }
-      try {
-        CSVExport.exportCSV(fos,
-                status.getSimulationConditions().getSimulation(),
-                status.getFlightData(),
-                _fields.toArray(new FlightDataType[]{}), _units.toArray(new Unit[]{}),
-                fieldSeparator, decimalPlaces, isExponentialNotation, commentCharacter,
-                simulationComments, fieldComments, eventComments);
-      } catch (IOException ex) {
-        Logger.getLogger(ExporterExtension.class.getName()).log(Level.SEVERE, null, ex);
-      }
-      fos.close();
-    } catch (FileNotFoundException ex) {
-      Logger.getLogger(ExporterListener.class.getName()).log(Level.SEVERE, null, ex);
-    } catch (IOException ex) {
-      Logger.getLogger(ExporterListener.class.getName()).log(Level.SEVERE, null, ex);
-    }
+  public void startSimulation(final SimulationStatus simulationStatus) throws SimulationException {
+      
   }
 }

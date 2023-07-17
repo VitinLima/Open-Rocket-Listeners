@@ -1,4 +1,4 @@
-package opensource.extensions.exporter;
+package opensource.extensions.listenermanager;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -17,15 +17,15 @@ import net.sf.openrocket.simulation.extension.AbstractSwingSimulationExtensionCo
  * @author 160047412
  */
 @Plugin
-public class ExporterConfigurator extends AbstractSwingSimulationExtensionConfigurator<ExporterExtension>{
+public class ListenerManagerConfigurator extends AbstractSwingSimulationExtensionConfigurator<ListenerManagerExtension>{
 
-    public ExporterConfigurator() {
-        super(ExporterExtension.class);
+    public ListenerManagerConfigurator() {
+        super(ListenerManagerExtension.class);
     }
     
     @Override
-    protected JComponent getConfigurationComponent(ExporterExtension e, Simulation simulation, JPanel panel) {
-        panel.add(new ExporterPanel(e));
+    protected JComponent getConfigurationComponent(ListenerManagerExtension e, Simulation simulation, JPanel panel) {
+        panel.add(new ListenerManagerPanel(e, simulation));
         return panel;
     }
     

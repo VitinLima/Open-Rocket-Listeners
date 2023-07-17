@@ -9,6 +9,7 @@ import opensource.extensions.exporter.ExporterExtension;
 import java.util.ArrayList;
 import net.sf.openrocket.document.Simulation;
 import net.sf.openrocket.simulation.extension.AbstractSimulationExtension;
+import net.sf.openrocket.simulation.extension.SimulationExtension;
 import net.sf.openrocket.simulation.listeners.AbstractSimulationListener;
 import net.sf.openrocket.util.Coordinate;
 
@@ -32,8 +33,8 @@ public class ImpactDispersionConditions{
   final ArrayList<Double> launchTemperatureList;
   final ArrayList<Double> launchPressureList;
   
-  final ArrayList<? extends AbstractSimulationListener> listenersList;
-  final ArrayList<? extends AbstractSimulationExtension> extensionsList;
+//  final ArrayList<? extends AbstractSimulationListener> simulationListeners;
+  final ArrayList<SimulationExtension> simulationExtensions;
   final ExporterExtension simulationExporter;
   Simulation nominalSimulation;
 
@@ -50,8 +51,8 @@ public class ImpactDispersionConditions{
     this.launchTemperatureList = new ArrayList<>();
     this.launchPressureList = new ArrayList<>();
     
-    this.listenersList = new ArrayList<>();
-    this.extensionsList = new ArrayList<>();
+//    this.simulationListeners = new ArrayList<>();
+    this.simulationExtensions = new ArrayList<>();
     this.simulationExporter = new ExporterExtension();
   }
 
